@@ -10,18 +10,10 @@ type Video {
      thumbnail: String
      length: Int
 }
-
-"User of a complete Video or a Module"
 type User {
      id: ID!
      name: String!
      email: String!
-}
-
-"Get video array for homepage grid"
-type Query { 
-     videosForHome: [Video!]!  
-     video(id: ID!): Video!
 }
 
 input AddVideoInput {
@@ -40,6 +32,12 @@ type AddVideoResponse {
 
 type Mutation {
   addVideo(input: AddVideoInput!): AddVideoResponse!
+}
+
+"Query"
+type Query { 
+     videosForHome: [Video!]!  
+     video(id: ID!): Video!
 }
 `
 

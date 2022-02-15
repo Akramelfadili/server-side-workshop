@@ -1,7 +1,5 @@
-
 import { getAndVerifyJWT } from '../jwt.js'
 
-//Middleware for checking if the jwt token is valid
 const applyAuthMiddleware = ({ app }) =>
      app.use((req, res, next) => {
           // if jwt is passed validate it and extract user, else returns null
@@ -13,4 +11,5 @@ const applyAuthMiddleware = ({ app }) =>
                return res.status(401).send({ message: 'Invalid or Expired token please login again' })
           }
      })
+
 export default applyAuthMiddleware
