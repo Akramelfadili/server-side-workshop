@@ -8,6 +8,8 @@ import * as config from './config.js'
 
 const { jwt: jwtConfig } = config
 
+
+// Get the header token
 export function getTokenFromHeader(req) {
      const hasToken =
           (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Token') ||
@@ -16,16 +18,17 @@ export function getTokenFromHeader(req) {
      return hasToken ? req.headers.authorization.split(' ')[1] : null
 }
 
-//To generate a JWT we need to specify the expiration a payload and sign it using our secret
+
+//Generate the JWT
 export async function generateJWT({
      expiration = jwtConfig.expiration,
      timeUnit = jwtConfig.timeUnit,
      secret = jwtConfig.secret,
+     user,
 }) {
      const payload = {
           exp: dayjs().add(expiration, timeUnit).unix(),
-          //Other dummy information this can be a user id /role in the future
-          k1: 'v1',
+          user: { id: user._id },
      }
 
      const token = jwt.sign(payload, secret)
@@ -33,7 +36,7 @@ export async function generateJWT({
      return token
 }
 
-// Retrieves and verifies token
+// Get and Verify Token
 export function getAndVerifyJWT(requestObject) {
      try {
           const token = getTokenFromHeader(requestObject)
