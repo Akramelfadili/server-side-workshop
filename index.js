@@ -9,6 +9,7 @@ import typeDefs from './schema.js'
 async function startServer() {
      await connectToMongo()
 
+
      const httpServer = http.createServer(app)
 
      const server = new ApolloServer({
@@ -25,7 +26,8 @@ async function startServer() {
                     req,
                }
           },
-     })
+
+  
 
      await server.start()
      server.applyMiddleware({ app })
