@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server-core'
-const typeDefs = gql
+const typeDefs = gql`
 
 "A track is a group of Modules that teaches about a specific topic"
 type Video {
@@ -22,4 +22,6 @@ type User {
 type Query {
      videosForHome: [Video!]!
 }
+
+`
 export default typeDefs
