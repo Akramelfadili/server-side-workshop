@@ -1,6 +1,8 @@
 import { getUserByEmail, createUser } from '../../models/user.js'
 import { generateJWT } from '../../jwt.js'
 
+
+//Fct to sign up
 async function signup(req, res) {
      const { email, name, password } = req.body
 
