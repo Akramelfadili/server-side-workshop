@@ -1,13 +1,16 @@
-
 import dayjs from 'dayjs'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
+
+
+/*
+     Here is the jwt generation functions
+*/
 
 dotenv.config()
 import * as config from './config.js'
 
 const { jwt: jwtConfig } = config
-
 
 // Get the header token
 export function getTokenFromHeader(req) {

@@ -1,6 +1,11 @@
 import mongoose from 'mongoose'
 import * as config from './config.js'
 
+
+/*
+     Here is the mongo connection
+*/
+
 const { mongo: mongoConfig } = config
 
 async function connectToMongo() {
