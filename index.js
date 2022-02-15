@@ -14,7 +14,17 @@ async function startServer() {
      const server = new ApolloServer({
           typeDefs,
           resolvers,
-          plugins: [ApolloServerPluginDrainHttpServer({ httpServer }), ApolloServerPluginLandingPageGraphQLPlayground()],
+          plugins: [
+               ApolloServerPluginDrainHttpServer({ httpServer }),
+               ApolloServerPluginLandingPageGraphQLPlayground(),
+          ],
+          context: ({ req }) => {
+               const { user } = req
+               return {
+                    user,
+                    req,
+               }
+          },
      })
 
      await server.start()
