@@ -19,9 +19,10 @@ type User {
 }
 
 "Get video array for homepage grid"
-type Query {
-     videosForHome: [Video!]!
+type Query { 
+     videosForHome: [Video!]!  
+     video(id: ID!): Video!
 }
-
 `
+
 export default typeDefs
