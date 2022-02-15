@@ -7,7 +7,7 @@ dotenv.config()
 async function startServer() {
      await connectToMongo()
 
-     app.listen(8080, () => {
+     app.listen(process.env.PORT || 8080, () => {
           console.log('Server on http://localhost:8080 🚀')
      })
 }
