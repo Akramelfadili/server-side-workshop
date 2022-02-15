@@ -1,15 +1,38 @@
-import dotenv from 'dotenv'
+import { ApolloServer } from 'apollo-server-express'
+import { ApolloServerPluginDrainHttpServer, ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
+import http from 'http'
+import resolvers from './resolvers.js'
 import app from './app.js'
 import connectToMongo from './mongo.js'
-
-dotenv.config()
+import typeDefs from './schema.js'
 
 async function startServer() {
      await connectToMongo()
 
-     app.listen(process.env.PORT || 8080, () => {
-          console.log('Server on http://localhost:8080 🚀')
-     })
+
+     const httpServer = http.createServer(app)
+
+     const server = new ApolloServer({
+          typeDefs,
+          resolvers,
+          plugins: [
+               ApolloServerPluginDrainHttpServer({ httpServer }),
+               ApolloServerPluginLandingPageGraphQLPlayground(),
+          ],
+          context: ({ req }) => {
+               const { user } = req
+               return {
+                    user,
+                    req,
+               }
+          },
+
+  
+
+     await server.start()
+     server.applyMiddleware({ app })
+     await new Promise((resolve) => httpServer.listen({ port: process.env.PORT || 8080 }, resolve))
+     console.log(`🚀 Server ready at http://localhost:8080${server.graphqlPath}`)
 }
 
 startServer()
