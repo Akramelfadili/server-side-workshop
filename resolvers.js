@@ -8,6 +8,7 @@ import {
 } from './models/video.js'
 import { requireUser } from './permissions.js'
 
+
 const resolvers = {
      Video: {
           id: (parent) => parent._id.toString(),
@@ -32,7 +33,6 @@ const resolvers = {
                const { title, description, thumbnail, length } = args.input
                const owner = ctx.user
 
-               //dummy validation
                if (title.trim() === '' || title.length < 3)
                     return {
                          success: false,
