@@ -11,6 +11,7 @@ import { getAndVerifyJWT } from './jwt.js'
 async function startServer() {
      await connectToMongo()
 
+
      const httpServer = http.createServer(app)
 
      const server = new ApolloServer({
@@ -29,7 +30,11 @@ async function startServer() {
                     req,
                }
           },
+
      })
+
+
+  
      await server.start()
      server.applyMiddleware({ app })
      await new Promise((resolve) => httpServer.listen({ port: process.env.PORT || 8080 }, resolve))
