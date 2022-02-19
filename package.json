@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "dev": "nodemon index.js",
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.mjs",
     "test": "jest",
@@ -30,6 +31,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^26.1.0",
     "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
     "prettier": "^2.5.1"
   }
 }

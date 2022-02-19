@@ -17,6 +17,10 @@ const UserSchema = new Schema(
           password: {
                type: String,
           },
+          /* resetLink: {
+               data: String,
+               default: ''
+          } */
      },
      { collection: 'user', timestamps: true }
 )

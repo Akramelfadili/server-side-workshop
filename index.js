@@ -5,6 +5,8 @@ import resolvers from './resolvers.js'
 import app from './app.js'
 import connectToMongo from './mongo.js'
 import typeDefs from './schema.js'
+import applyAuthMiddleware from './middlewares/auth.js'
+import { getAndVerifyJWT } from './jwt.js'
 
 async function startServer() {
      await connectToMongo()
@@ -19,18 +21,18 @@ async function startServer() {
                ApolloServerPluginLandingPageGraphQLPlayground(),
           ],
           context: ({ req }) => {
-               const { user } = req
+               const payload = getAndVerifyJWT(req)
+               let user = payload?.user
+               console.log(user);
                return {
                     user,
                     req,
                }
           },
      })
-
      await server.start()
      server.applyMiddleware({ app })
      await new Promise((resolve) => httpServer.listen({ port: process.env.PORT || 8080 }, resolve))
      console.log(`🚀 Server ready at http://localhost:8080${server.graphqlPath}`)
 }
-
 startServer()

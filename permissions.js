@@ -6,6 +6,8 @@ export function requireUser(resolver) {
      return async (obj, args, context, info) => {
           // user payload from the token (only holds the ID)
           const { user: userJWTPayload } = context
+          //console.log('===========================')
+          //console.log(context)
 
           if (!userJWTPayload || !userJWTPayload.id) {
                throw new AuthenticationError('You must be signed in to do this')
